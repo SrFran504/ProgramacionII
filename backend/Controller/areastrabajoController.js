@@ -2,11 +2,11 @@ const controller = {};
 
 controller.list = (req, res) => {
     req.getConnection((error,conn) =>{
-        conn.query('select *from areas_trabajo',(err,areas_trabajo) =>{
+        conn.query('select *from areastrabajo',(err,areastrabajo) =>{
             if(err){
                 res.json(err);
             }
-            res.json(areas_trabajo);
+            res.json(areastrabajo);
         });
 
     });
@@ -18,8 +18,8 @@ controller.edit = (req, res) => {
     const {idarea}= req.params;
    
     req.getConnection((err,conn) =>{
-        conn.query('select *from areas_trabajo where idarea=?', [idarea], (err,areas_trabajo) => {
-            res.json(areas_trabajo[0]);
+        conn.query('select *from areastrabajo where idarea=?', [idarea], (err,areastrabajo) => {
+            res.json(areastrabajo[0]);
 
         });
 
@@ -29,9 +29,9 @@ controller.edit = (req, res) => {
 
 controller.save = (req,res) =>{
     const data = req.body;
-   req.getConnection((err,areas_trabajo)=> {
-       conn.query('insert into areas_trabajo set?', [data], (err,areas_trabajo) => {
-        res.json(areas_trabajo);
+   req.getConnection((err,areastrabajo)=> {
+       conn.query('insert into areastrabajo set?', [data], (err,areastrabajo) => {
+        res.json(areastrabajo);
        });
    })
 };
@@ -39,10 +39,10 @@ controller.save = (req,res) =>{
 controller.update = (req,res) =>{
 
     const {idarea}= req.params;
-    const nuevo_areas_trabajo = req.body;
+    const nuevo_areastrabajo = req.body;
   
     req.getConnection((err, conn) => {
-        conn.query('update areas_trabajo set ? where idarea =?', [nuevo_areas_trabajo, idarea], (err,rows) =>{ 
+        conn.query('update areastrabajo set ? where idarea =?', [nuevo_areastrabajo, idarea], (err,rows) =>{ 
             res.json({ message: "Registro Actualizado" }); 
 
         });
@@ -52,7 +52,7 @@ controller.update = (req,res) =>{
 controller.delete = (req,res) =>{
     const {idarea}= req.params; 
   req.getConnection((err,conn) => {
-      conn.query('delete from areas_trabajo where idarea =?', [idarea], (err, rows) => {
+      conn.query('delete from areastrabajo where idarea =?', [idarea], (err, rows) => {
         res.json({ message: "Registro Eliminado" }); 
       });
   })

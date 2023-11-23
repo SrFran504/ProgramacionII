@@ -9,3 +9,4 @@ router.get('/:idprov', proveedorController.edit);
 router.post('/:idprov', proveedorController.update);
 
 module.exports = router;
+
